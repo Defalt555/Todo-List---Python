@@ -86,7 +86,8 @@ while True:
       f = open("TD - datas.txt", "x")
     except FileExistsError : 
       print("[ ! ] file already exists")
-
+      # Mettre les infos dans le fichier
+      #JSON pour data ?
   if usr_cmd == "check" :
     if len(todo_list) != 0:
       print(f"currently, there is {todo_list} in the todo list that were not checked.")
