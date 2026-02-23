@@ -1,10 +1,16 @@
 from math import *
 import os.path
+import csv
+
 
 todo_list = []
 todo_list_checked = []
 
+
+
 print("--- Welcome to Todo-List creator, please enter a command --- \n")
+
+
 
 while True:
   usr_cmd = input("[TD] >>> ").lower()
@@ -23,6 +29,7 @@ while True:
     todo_list.append(task_name)
     print(f"{task_name} has successfully been added.")
 
+
   if "rm" in usr_cmd:
     task_name_split = usr_cmd.split()
     if "rm" not in task_name_split:
@@ -39,6 +46,7 @@ while True:
       print(f"{task_name} has successfully been removed.")
     else:
       print(f"{task_name} hasn't been found in this list. Try Again.")
+
 
   if "mark" in usr_cmd:
     task_name_split = usr_cmd.split()
@@ -58,7 +66,8 @@ while True:
     else:
       print(f"{task_name} hasn't been found in this list. Try Again.")
   
-  if usr_cmd == "import" :
+
+  if usr_cmd == "import" : # Not done
     task_name_split = usr_cmd.split()
     if "import" not in task_name_split:
       print(f"Error : import wasn't spelled properly in {task_name_split}.")
@@ -70,6 +79,7 @@ while True:
     task_name = " ".join(str(x) for x in task_name_split)
     print(f"[DEBUG] : current value is {task_name}")
     pass 
+
 
   if usr_cmd == "export" :
     task_name_split = usr_cmd.split()
@@ -83,11 +93,13 @@ while True:
     task_name = " ".join(str(x) for x in task_name_split)
     print(f"[DEBUG] : current value is {task_name}")
     try :
-      f = open("TD - datas.txt", "x")
+      with open("TD - Datas", "w", newline = "") as csvfile: # Not working ... ? 
+        my_writer = csv.writer(csvfile, delimiter= " ")
+        my_writer.writerow(task_name_split)
     except FileExistsError : 
       print("[ ! ] file already exists")
-      # Mettre les infos dans le fichier
-      #JSON pour data ?
+    
+  
   if usr_cmd == "check" :
     if len(todo_list) != 0:
       print(f"currently, there is {todo_list} in the todo list that were not checked.")
