@@ -1,6 +1,6 @@
 from math import *
 import os.path
-import csv
+from pathlib import Path
 
 
 todo_list = []
@@ -77,8 +77,15 @@ while True:
       continue
     task_name_split.remove("import")
     task_name = " ".join(str(x) for x in task_name_split)
-    print(f"[DEBUG] : current value is {task_name}")
-    pass 
+    file = open("TD - data.txt", "r")
+    for line in file:
+        if "Uncompleted tasks" in line:
+          task_name_split = line.split()
+          task_name_split.remove("Uncompleted")
+          todo_list = " ".join(str(x) for x in task_name_split) # Errors on line 45, 29 (rm and add commands) : " AttributeError: 'str' object has no attribute 'append' "
+          task_name = task_name_split
+    file.close()
+
 
 
   if usr_cmd == "export" :
@@ -91,13 +98,14 @@ while True:
       continue
     task_name_split.remove("export")
     task_name = " ".join(str(x) for x in task_name_split)
-    print(f"[DEBUG] : current value is {task_name}")
-    try :
-      with open("TD - Datas", "w", newline = "") as csvfile: # Not working ... ? 
-        my_writer = csv.writer(csvfile, delimiter= " ")
-        my_writer.writerow(task_name_split)
-    except FileExistsError : 
-      print("[ ! ] file already exists")
+    a = Path("TD - data.txt")
+    if a.exists():
+      print("Overwriting existing file...")
+    with open("TD - data.txt", "w", encoding="utf-8") as f :
+      f.write(f"Uncompleted tasks : {todo_list}. \n")
+      f.write(f"Completed tasks : {todo_list_checked}")
+      print("Done.")
+
     
   
   if usr_cmd == "check" :
