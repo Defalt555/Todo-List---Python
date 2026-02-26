@@ -79,12 +79,14 @@ while True:
     task_name = " ".join(str(x) for x in task_name_split)
     file = open("TD - data.txt", "r")
     for line in file:
-        if "Uncompleted tasks" in line:
-          task_name_split = line.split()
-          task_name_split.remove("Uncompleted")
-          todo_list = " ".join(str(x) for x in task_name_split) # Errors on line 45, 29 (rm and add commands) : " AttributeError: 'str' object has no attribute 'append' "
-          task_name = task_name_split
+      task_name_split = line[0] # Errors on line 45, 29 (rm and add commands) : " AttributeError: 'str' object has no attribute 'append' "
+      task_name = task_name_split
+      todo_list = task_name
+      task_name_split = line[1] # Errors on line 45, 29 (rm and add commands) : " AttributeError: 'str' object has no attribute 'append' "
+      task_name = task_name_split
+      todo_list_checked = task_name
     file.close()
+    print(f"[DEBUG] : {todo_list} // {task_name} // {task_name_split}")                                                                                                                              
 
 
 
@@ -102,8 +104,8 @@ while True:
     if a.exists():
       print("Overwriting existing file...")
     with open("TD - data.txt", "w", encoding="utf-8") as f :
-      f.write(f"Uncompleted tasks : {todo_list}. \n")
-      f.write(f"Completed tasks : {todo_list_checked}")
+      f.write(f"{todo_list}")
+      f.write(f"{todo_list_checked}")
       print("Done.")
 
     
