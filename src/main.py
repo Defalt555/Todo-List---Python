@@ -1,7 +1,7 @@
 from math import *
 import os.path
 from pathlib import Path
-
+import json 
 
 todo_list = []
 todo_list_checked = []
@@ -77,15 +77,11 @@ while True:
       continue
     task_name_split.remove("import")
     task_name = " ".join(str(x) for x in task_name_split)
-    file = open("TD - data.txt", "r")
-    for line in file:
-      task_name_split = line[0] # Errors on line 45, 29 (rm and add commands) : " AttributeError: 'str' object has no attribute 'append' "
-      task_name = task_name_split
-      todo_list = task_name
-      task_name_split = line[1] # Errors on line 45, 29 (rm and add commands) : " AttributeError: 'str' object has no attribute 'append' "
-      task_name = task_name_split
-      todo_list_checked = task_name
-    file.close()
+    with open("TD - data.json", "r") as read_it : 
+      json_import = json.load(read_it)
+    todo_list = json.loads(json_import)
+    task_name = json.loads(json_import)
+    
     print(f"[DEBUG] : {todo_list} // {task_name} // {task_name_split}")                                                                                                                              
 
 
@@ -100,12 +96,12 @@ while True:
       continue
     task_name_split.remove("export")
     task_name = " ".join(str(x) for x in task_name_split)
-    a = Path("TD - data.txt")
+    a = Path("TD - data.json")
     if a.exists():
       print("Overwriting existing file...")
-    with open("TD - data.txt", "w", encoding="utf-8") as f :
-      f.write(f"{todo_list}")
-      f.write(f"{todo_list_checked}")
+    with open("TD - data.json", "w") as f :
+      json.dump(todo_list,f)
+      json.dump(todo_list_checked,f)
       print("Done.")
 
     
