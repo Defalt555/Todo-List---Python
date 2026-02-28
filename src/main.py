@@ -7,13 +7,15 @@ todo_list = []
 todo_list_checked = []
 
 
+# User interface / cmds here
+
 
 print("--- Welcome to Todo-List creator, please enter a command --- \n")
 
-
-
 while True:
   usr_cmd = input("[TD] >>> ").lower()
+
+
 
   if "add" in usr_cmd:
     task_name_split = usr_cmd.split()
@@ -66,44 +68,20 @@ while True:
     else:
       print(f"{task_name} hasn't been found in this list. Try Again.")
   
+# import and export commands temporary removed : moved into utils.py
 
-  if usr_cmd == "import" : # Not done
+  if usr_cmd == "clean" : 
     task_name_split = usr_cmd.split()
-    if "import" not in task_name_split:
-      print(f"Error : import wasn't spelled properly in {task_name_split}.")
+    if "clean" not in task_name_split:
+      print(f"Error : clean wasn't spelled properly in {task_name_split}.")
       continue
-    if "import" not in task_name_split[0]:
+    if "clean" not in task_name_split[0]:
       print(f"Error : Wrong order of command.")
       continue
-    task_name_split.remove("import")
+    task_name_split.remove("clean")
     task_name = " ".join(str(x) for x in task_name_split)
-    with open("TD - data.json", "r") as read_it : 
-      json_import = json.load(read_it)
-    todo_list = json.loads(json_import)
-    task_name = json.loads(json_import)
-    
-    print(f"[DEBUG] : {todo_list} // {task_name} // {task_name_split}")                                                                                                                              
-
-
-
-  if usr_cmd == "export" :
-    task_name_split = usr_cmd.split()
-    if "export" not in task_name_split:
-      print(f"Error : export wasn't spelled properly in {task_name_split}.")
-      continue
-    if "export" not in task_name_split[0]:
-      print(f"Error : Wrong order of command.")
-      continue
-    task_name_split.remove("export")
-    task_name = " ".join(str(x) for x in task_name_split)
-    a = Path("TD - data.json")
-    if a.exists():
-      print("Overwriting existing file...")
-    with open("TD - data.json", "w") as f :
-      json.dump(todo_list,f)
-      json.dump(todo_list_checked,f)
-      print("Done.")
-
+    todo_list.clear()
+    todo_list_checked.clear()
     
   
   if usr_cmd == "check" :
@@ -112,7 +90,7 @@ while True:
     else:
       print("There is no task remaining.")
     if len(todo_list_checked) > 0 :
-      print(f"And there is {todo_list} that are checked.")
+      print(f"And there is {todo_list_checked} that are checked.")
   
   if usr_cmd == "exit" :
     print("Exiting script.")
