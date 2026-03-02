@@ -9,13 +9,14 @@ datafile = "TD - data.json"
 datafolder_path = os.path.join(datafolder, datafile)
 
 
-def exporttd(todo_list, todo_list_checked):
+def exporttd(manager):
+    foldertd()
     if a.exists():
       print("Overwriting existing file...")
 
     json_data = {
-      "Uncompleted tasks": todo_list,
-      "Completed tasks": todo_list_checked
+      "Uncompleted tasks": manager.todo_list,
+      "Completed tasks": manager.todo_list_checked
     }
 
     with open(datafolder_path, "w", encoding="utf-8") as f :
@@ -24,17 +25,17 @@ def exporttd(todo_list, todo_list_checked):
 
 
 
-def importtd():
+def importtd(manager):
+    print("[DEBUG] : Executed")
     if not os.path.exists(datafolder_path):
        print("Importation impossible : aucune données.")
        return [], []
     
     try:
-        with open("data/TD - data.json", "r", encoding="utf-8") as f : 
+        with open(f"data/{datafile}", "r", encoding="utf-8") as f : 
             json_data = json.load(f)
-        todo_list = json_data["Uncompleted tasks"]
-        todo_list_checked = json_data["Completed tasks"]
-        return todo_list, todo_list_checked      
+        manager.todo_list = json_data.get("Uncompleted tasks", [])
+        manager.todo_list_checked = json_data.get("Completed tasks", [])
     
     except json.JSONDecodeError:
         print("Importation impossible : fichier corrompu")
@@ -44,6 +45,6 @@ def importtd():
 def foldertd():
     if not os.path.exists(datafolder):
         os.makedirs(datafolder)
-    print("Data folder was not found : New folder created.")
+        print("Data folder was not found : New folder created.")
 
 # Functions here
