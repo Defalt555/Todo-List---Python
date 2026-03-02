@@ -26,7 +26,6 @@ def exporttd(manager):
 
 
 def importtd(manager):
-    print("[DEBUG] : Executed")
     if not os.path.exists(datafolder_path):
        print("Importation impossible : aucune données.")
        return [], []
