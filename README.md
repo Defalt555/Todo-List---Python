@@ -16,9 +16,7 @@ The program finally takes a more structured form, with readme and .gitignore fil
 
 
 
-# Who I am ? 
-Im a French high school student who loves programming but didn't relly deep dive into it. So I want to be more active by posting on GitHub and participating as much as possible. Taking experience is my main objective for now, because my dream job is to be a software engineer. 
-
-
+# How to help ? 
+You can help this project by simply submitting your version of the code, commenting about some issues. It would really helps !
 
 
