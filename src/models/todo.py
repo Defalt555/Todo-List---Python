@@ -1,4 +1,5 @@
 class Todo:
+    # cmds Functions
     def __init__(self):
         self.todo_list = []
         self.todo_list_checked = []
@@ -38,4 +39,3 @@ class Todo:
                 result.append(f" {i} - {task}")
 
         return "\n".join(result) if result else "There is no tasks for now."
-# Task managing here

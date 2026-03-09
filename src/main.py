@@ -1,5 +1,8 @@
-from todo import Todo
-from utils import importtd, exporttd
+from models.todo import Todo
+from utils.utils import importtd, exporttd
+from tkinter import Tk
+from views.main_window import MainWindow
+
 
 def extract_task(cmd, keyword):
     return cmd.replace(keyword, "").strip()
@@ -56,6 +59,13 @@ def main():
             print("Exiting...")
             break
         
+
+        elif usr_cmd == "gui":
+            print("Using Tkinter...")
+            # create window for tkinter gui
+            root = Tk()
+            app = MainWindow(root)
+            root.mainloop()
 
         else:
             print(f" Command {usr_cmd} not found.")
