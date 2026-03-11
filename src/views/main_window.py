@@ -14,4 +14,4 @@ class MainWindow():
     def widgets(self):
         self.testlabel = Label(root, text="Silksong")
         self.testlabel.pack()
-        self.button = ttk.Button(mainframe)
+        self.button = ttk.Button(self.mainframe)
