@@ -12,6 +12,6 @@ class MainWindow():
         self.root.config(background="#5b6961")
     
     def widgets(self):
-        self.testlabel = Label(root, text="Silksong")
+        self.testlabel = Label(self.root, text="Silksong")
         self.testlabel.pack()
-        self.button = ttk.Button(mainframe)
+        self.button = ttk.Button(self.mainframe)
